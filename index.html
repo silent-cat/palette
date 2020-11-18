@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas画板</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        canvas {
+            /* border: 1px solid red; */
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+
+    <script>
+
+        // 将画板占满可视窗口
+        canvas.width = document.documentElement.clientWidth
+        canvas.height = document.documentElement.clientHeight
+
+        const ctx = canvas.getContext('2d');
+        // 控制画笔填充色
+        ctx.fillStyle = "red"
+        // 用于判断画笔是否可以工作
+        let painting = false
+
+        canvas.onmousedown = (e) => {
+            painting = true
+        }
+
+        canvas.onmousemove = (e) => {
+
+            if (painting) {
+                ctx.beginPath();
+                ctx.arc(e.clientX, e.clientY, 2, 0, 2 * Math.PI);
+                // 画轮廓用stroke
+                // ctx.stroke();
+                ctx.fill()
+            }
+        }
+
+        canvas.onmouseup = (e) => {
+            painting = false
+        }
+
+    </script>
+</body>
+
+</html>
